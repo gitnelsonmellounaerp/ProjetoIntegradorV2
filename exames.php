@@ -21,6 +21,7 @@ session_start();
             <thead class="thead-dark">
                 <tr>
                     <th><i></i> Nome do Paciente</th>
+                    <th><i></i> Nome do Examinador</th>
                     <th><i></i> Data do Exame</th>
                     <th><i></i></th>
                 </tr>
@@ -35,6 +36,7 @@ session_start();
                     while($row = mysqli_fetch_assoc($result)){
                         $exame_id = $row['exame_id'];
                         $paciente_nome = $row['paciente_nome'];
+                        $examinador = $row['examinador'];
                         $dt_exame = $row['dt_exame'];
                         $glicemia = $row['glicemia'];
                         $colesterol = $row['colesterol'];
@@ -42,6 +44,7 @@ session_start();
                         echo '
                         <tr>
                         <td>'.$paciente_nome.'</td>
+                        <td>'.$examinador.'</td>
                         <td>'.$dt_exame.'</td>
                         <td>
                         
@@ -73,8 +76,12 @@ session_start();
             <fieldset disabled>
                 <legend>DADOS COMPLETOS DO EXAME</legend>
                 <div class="mb-3">
-                <label for="mostrarNome" class="form-label">Nome Completo</label>
+                <label for="mostrarNome" class="form-label">Nome do Paciente</label>
                 <input type="text" id="mostrarNome" class="form-control" placeholder="Campo Vazio">
+                </div>
+                <div class="mb-3">
+                <label for="mostrarExaminador" class="form-label">Nome do Examinador</label>
+                <input type="text" id="mostrarExaminador" class="form-control" placeholder="Campo Vazio">
                 </div>
                 <div class="mb-3">
                 <label for="mostrarData" class="form-label">Data de Nascimento</label>
@@ -121,6 +128,7 @@ session_start();
                 var exame_id=JSON.parse(data);
 
                 $('#mostrarNome').val(exame_id.paciente_nome);
+                $('#mostrarExaminador').val(exame_id.examinador);
                 $('#mostrarData').val(exame_id.dt_exame);
                 $('#mostrarGlicemia').val(exame_id.glicemia);
                 $('#mostrarColesterol').val(exame_id.colesterol);

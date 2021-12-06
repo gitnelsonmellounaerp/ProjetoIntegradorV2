@@ -10,6 +10,7 @@ error_reporting(0);
 
     $exame_id = $row['exame_id'];
     $paciente_nome = $row['paciente_nome'];
+    $examinador = $row['examinador'];
     $dt_exame = $row['dt_exame'];
     $glicemia = $row['glicemia'];
     $colesterol = $row['colesterol'];
@@ -19,13 +20,14 @@ error_reporting(0);
 
     $exame_id = $_POST['exame_id'];
     $paciente_nome = $_POST['paciente_nome'];
+    $examinador = $_POST['examinador'];
     $dt_exame = $_POST['dt_exame'];
     $glicemia = $_POST['glicemia'];
     $colesterol = $_POST['colesterol'];
     $pressao = $_POST['pressao'];
 
 
-        $sql = "update exames set exame_id=$id, paciente_nome='$paciente_nome', dt_exame='$dt_exame', glicemia='$glicemia', colesterol='$colesterol', pressao='$pressao' where exame_id=$id";
+        $sql = "update exames set exame_id=$id, paciente_nome='$paciente_nome', examinador='$examinador', dt_exame='$dt_exame', glicemia='$glicemia', colesterol='$colesterol', pressao='$pressao' where exame_id=$id";
         
         $result = mysqli_query ($con, $sql);
 
@@ -50,9 +52,13 @@ error_reporting(0);
   <div class="col-md-12 mb-3">
     <label class="form-label"><b>Dados do Exame</b></label>
   </div>
-  <div class="col-md-10 mb-3">
-    <label for="paciente_nome" class="form-label">Nome do paciente</label>
+  <div class="col-md-5 mb-3">
+    <label for="paciente_nome" class="form-label">Nome do Paciente</label>
     <input type="text" required="" class="form-control" id="paciente_nome" name="paciente_nome" value="<?php echo $paciente_nome;?>">
+  </div>
+  <div class="col-md-5 mb-3">
+    <label for="examinador" class="form-label">Nome do Examinador</label>
+    <input type="text" required="" class="form-control" id="examinador" name="examinador" value="<?php echo $examinador;?>">
   </div>
   <div class="col-md-2 mb-3">
     <label for="dt_exame" class="form-label">Data do Exame</label>

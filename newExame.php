@@ -7,15 +7,16 @@ error_reporting(0);
 
         $exame_id = $_POST['exame_id'];
         $paciente_nome = $_POST['paciente_nome'];
+        $examinador = $_POST['examinador'];
         $dt_exame = $_POST['dt_exame'];
         $glicemia = $_POST['glicemia'];
         $colesterol = $_POST['colesterol'];
         $pressao = $_POST['pressao'];
 
 
-        $sql = "insert into exames (exame_id, paciente_nome, dt_exame, glicemia, colesterol, pressao) 
+        $sql = "insert into exames (exame_id, paciente_nome, examinador, dt_exame, glicemia, colesterol, pressao) 
           
-          values ('$exame_id', '$paciente_nome', '$dt_exame', '$glicemia', '$colesterol', '$pressao')";
+          values ('$exame_id', '$paciente_nome', '$examinador', '$dt_exame', '$glicemia', '$colesterol', '$pressao')";
 
         $result = mysqli_query ($con, $sql);
 
@@ -40,9 +41,13 @@ error_reporting(0);
   <div class="col-md-12 mb-3">
     <label class="form-label"><b>Dados do Exame</b></label>
   </div>
-  <div class="col-md-10 mb-3">
-    <label for="paciente_nome" class="form-label">Nome do paciente</label>
+  <div class="col-md-5 mb-3">
+    <label for="paciente_nome" class="form-label">Nome do Paciente</label>
     <input type="text" required="" class="form-control" id="paciente_nome" name="paciente_nome">
+  </div>
+  <div class="col-md-5 mb-3">
+    <label for="examinador" class="form-label">Nome do Examinador</label>
+    <input type="text" required="" class="form-control" id="examinador" name="examinador">
   </div>
   <div class="col-md-2 mb-3">
     <label for="dt_exame" class="form-label">Data do Exame</label>

@@ -21,3 +21,7 @@ if(isset($_POST['paciente_id'])){
 }
 
 ?>
+
+<?php
+    $con->close();
+?>

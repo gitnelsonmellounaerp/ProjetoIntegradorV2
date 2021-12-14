@@ -149,8 +149,23 @@ error_reporting(0);
     <label class="form-label"><b>Dados Clínicos</b></label>
   </div>
   <div class="col-md-3 mb-3">
-    <label class="form-check-label" for="hipertensao">Hipertensão</label>
-    <input type="checkbox" class="form-check-input"  role="switch" id="hipertensao" value="1"  name="hipertensao">
+    <?php 
+      if($hipertensao == 1){
+        echo '
+        <label class="form-check-label" for="hipertensao">Hipertensão</label>
+        <input type="checkbox" class="form-check-input"  role="switch" id="hipertensao" value="1"  name="hipertensao" checked>
+        '
+      ;} else {
+        echo '
+        <label class="form-check-label" for="hipertensao">Hipertensão</label>
+        <input type="checkbox" class="form-check-input"  role="switch" id="hipertensao" value="1"  name="hipertensao">
+        '
+      ;}
+    
+    
+    ?>
+
+    
     <?php
 
     if (isset($_POST['hipertensao'])){
@@ -164,8 +179,23 @@ error_reporting(0);
 
   </div>
   <div class="col-md-3 mb-3">
-    <label class="form-check-label" for="diabetes">Diabetes</label>
-    <input type="checkbox" class="form-check-input"  role="switch" value="1"  id="diabetes"  name="diabetes">
+  <?php 
+      if($diabetes == 1){
+        echo '
+        <label class="form-check-label" for="diabetes">Diabetes</label>
+        <input type="checkbox" class="form-check-input"  role="switch" id="diabetes" value="1"  name="diabetes" checked>
+        '
+      ;} else {
+        echo '
+        <label class="form-check-label" for="diabetes">Diabetes</label>
+        <input type="checkbox" class="form-check-input"  role="switch" id="diabetes" value="1"  name="diabetes">
+        '
+      ;}
+    
+    
+    ?>
+
+    
     <?php
 
     if (isset($_POST['diabetes'])){
@@ -178,8 +208,23 @@ error_reporting(0);
 ?>
   </div>
   <div class="col-md-3 mb-3">
-    <label class="form-check-label" for="fumante">Fumante</label>
-    <input type="checkbox" class="form-check-input" role="switch" value="1"  id="fumante"  name="fumante">
+  <?php 
+      if($fumante == 1){
+        echo '
+        <label class="form-check-label" for="fumante">Fumante</label>
+        <input type="checkbox" class="form-check-input"  role="switch" id="fumante" value="1" name="fumante" checked>
+        '
+      ;} else {
+        echo '
+        <label class="form-check-label" for="fumante">Fumante</label>
+        <input type="checkbox" class="form-check-input"  role="switch" id="fumante" value="1"  name="fumante">
+        '
+      ;}
+    
+    
+    ?>
+
+    
     <?php
 
     if (isset($_POST['fumante'])){
@@ -192,8 +237,23 @@ error_reporting(0);
 ?>
   </div>
   <div class="col-md-3 mb-3">
-    <label class="form-check-label" for="cardiaco">Doença Cardíaca</label>
-    <input type="checkbox" class="form-check-input" role="switch" value="1"  id="cardiaco"  name="cardiaco">
+  <?php 
+      if($cardiaco == 1){
+        echo '
+        <label class="form-check-label" for="cardiaco">Doença Cardíaca?</label>
+        <input type="checkbox" class="form-check-input"  role="switch" value="1"  id="cardiaco" name="cardiaco" checked>
+        '
+      ;} else {
+        echo '
+        <label class="form-check-label" for="cardiaco">Doença Cardíaca</label>
+        <input type="checkbox" class="form-check-input"  role="switch" value="1"  id="cardiaco"  name="cardiaco">
+        '
+      ;}
+    
+    
+    ?>
+
+    
     <?php
 
     if (isset($_POST['cardiaco'])){
@@ -215,8 +275,14 @@ error_reporting(0);
   </div>
   <div class="col-md-3 mb-3">
     <button type="submit" name="submit" class="btn btn-primary">Update</button>
-    <button type="submit" class="btn btn-secondary"><a href=".?p=pacientes" class="text-light">Voltar</a></button>
+    
   </div>
 </form>
+<button type="submit" class="btn btn-secondary"><a href=".?p=pacientes" class="text-light">Voltar</a></button>
+
+
+<?php
+    $con->close();
+?>
 
 

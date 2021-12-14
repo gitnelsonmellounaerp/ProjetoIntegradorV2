@@ -13,16 +13,16 @@ session_start();
     </div>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
-        <form method="post" action=".?p=searchExames">
-                <div class="body row">
-                    <div class="col-md-4 mb-3">
-                        <input class="form-control" name="buscaExame" type="text" placeholder="Busca por nome">
+            <form method="post" action=".?p=searchExames">
+                    <div class="body row">
+                        <div class="col-md-4 mb-3">
+                            <input class="form-control" name="buscaExame" type="text" placeholder="Busca por nome">
+                        </div>
+                        <div class="col-md-1 mb-3">
+                            <input class="btn btn-primary" type="submit" name="submit" placeholder="Busca">
+                        </div>
                     </div>
-                    <div class="col-md-1 mb-3">
-                        <input class="btn btn-primary" type="submit" name="submit" placeholder="Busca">
-                    </div>
-                </div>
-            </form>
+                </form>
             <thead class="thead-dark">
                 <tr>
                     <th><i></i> Nome do Paciente</th>
@@ -37,32 +37,49 @@ session_start();
                 $sql = "select * from exames order by paciente_nome";
                 $result = mysqli_query($con, $sql);
                 
-                if($result) {
-                    while($row = mysqli_fetch_assoc($result)){
-                        $exame_id = $row['exame_id'];
-                        $paciente_nome = $row['paciente_nome'];
-                        $examinador = $row['examinador'];
-                        $dt_exame = $row['dt_exame'];
-                        $glicemia = $row['glicemia'];
-                        $colesterol = $row['colesterol'];
-                        $pressao = $row['pressao'];
-                        echo '
-                        <tr>
-                        <td>'.$paciente_nome.'</td>
-                        <td>'.$examinador.'</td>
-                        <td>'.$dt_exame.'</td>
-                        <td>
-                        
-                        <button type="button" onclick="GetDetails('.$exame_id.')" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Visualizar</button>
-                        ⠀⠀
-                        <button class="btn btn-primary" title="Editar" ><a href=".?p=editExame&editarid='.$exame_id.'" class="text-light">EDITAR</a></button>
-                        ⠀⠀
-                        <button class="btn btn-danger" color="red" title="Remover" ><a href="deleteExame.php?deleteid='.$exame_id.'" class="text-light">DELETAR</a></button>
-                        </td>
+                if (isset($_POST['submit'])){
 
+                    $search = mysqli_real_escape_string($con, $_POST['buscaExame']);
+                    $sql = "SELECT * FROM exames WHERE paciente_nome LIKE '%$search%'";
+                    $result = mysqli_query($con, $sql);
+                    $queryResults = mysqli_num_rows($result);
+    
+                    if ($queryResults > 0){
+                        while($row = mysqli_fetch_assoc($result)){
+                            $exame_id = $row['exame_id'];
+                            $paciente_nome = $row['paciente_nome'];
+                            $examinador = $row['examinador'];
+                            $dt_exame = $row['dt_exame'];
+                            $glicemia = $row['glicemia'];
+                            $colesterol = $row['colesterol'];
+                            $pressao = $row['pressao'];
+                            echo '
+                            <tr>
+                            <td>'.$paciente_nome.'</td>
+                            <td>'.$examinador.'</td>
+                            <td>'.$dt_exame.'</td>
+                            <td>
+                            
+                            <button type="button" onclick="GetDetails('.$exame_id.')" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Visualizar</button>
+                            ⠀⠀
+                            <button class="btn btn-primary" title="Editar" ><a href=".?p=editExame&editarid='.$exame_id.'" class="text-light">EDITAR</a></button>
+                            ⠀⠀
+                            <button class="btn btn-danger" color="red" title="Remover" ><a href="deleteExame.php?deleteid='.$exame_id.'" class="text-light">DELETAR</a></button>
+                            </td>
+    
+                            </tr>';
+    
+                        }
+    
+    
+                    } else {
+                        echo '<tr>
+                        <td>Sem Resultados</td>
                         </tr>';
                     }
-                } 
+    
+    
+                }
                ?>
             </tbody>
         </table>

@@ -34,52 +34,70 @@ session_start();
             <tbody>
             <?php
 
-            $sql = "select * from pacientes order by paciente_nome";
-            $result = mysqli_query($con, $sql);
+     
+
+            if (isset($_POST['submit'])){
+
+                $search = mysqli_real_escape_string($con, $_POST['buscaNome']);
+                $sql = "SELECT * FROM pacientes WHERE paciente_nome LIKE '%$search%'";
+                $result = mysqli_query($con, $sql);
+                $queryResults = mysqli_num_rows($result);
+
+                if ($queryResults > 0){
+                    while($row = mysqli_fetch_assoc($result)){
+                        $paciente_id = $row['paciente_id'];
+                        $paciente_nome = $row['paciente_nome'];
+                        $dt_nasc = $row['dt_nasc'];
+                        $sexo = $row['sexo'];
+                        $endereco = $row['endereco'];
+                        $numero = $row['numero'];
+                        $complemento = $row['complemento'];
+                        $bairro = $row['bairro'];
+                        $cidade = $row['cidade'];
+                        $cep = $row['cep'];
+                        $email = $row['email'];
+                        $celular = $row['celular'];
+                        $telefone = $row['telefone'];
+                        $peso = $row['peso'];
+                        $altura = $row['altura'];
+                        $hipertensao = $row['hipertensao'];
+                        $diabetes = $row['diabetes'];
+                        $fumante = $row['fumante'];
+                        $cardiaco = $row['cardiaco'];
+                        $observacoes = $row['observacoes'];
+                        $medicacao = $row['medicacao'];
+                        echo '
+                        <tr>
+                        <td>'.$paciente_nome.'</td>
+                        <td>'.$dt_nasc.'</td>
+                        <td>'.$sexo.'</td>
+    
+                        <td>
+                        
+                        <button type="button" onclick="GetDetails('.$paciente_id.')" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Visualizar</button>⠀⠀
+    
+                        <button class="btn btn-primary" title="Editar" ><a href=".?p=editar&editarid='.$paciente_id.'" class="text-light">EDITAR</a></button>
+                        ⠀⠀
+                        <button class="btn btn-danger" color="red" title="Remover" ><a href="delete.php?deleteid='.$paciente_id.'" class="text-light">DELETAR</a></button>
+                        </td>
+    
+                        </tr>';
+                        
+
+                    }
 
 
-            if($result) {
-            
-                while($row = mysqli_fetch_assoc($result)){
-                    $paciente_id = $row['paciente_id'];
-                    $paciente_nome = $row['paciente_nome'];
-                    $dt_nasc = $row['dt_nasc'];
-                    $sexo = $row['sexo'];
-                    $endereco = $row['endereco'];
-                    $numero = $row['numero'];
-                    $complemento = $row['complemento'];
-                    $bairro = $row['bairro'];
-                    $cidade = $row['cidade'];
-                    $cep = $row['cep'];
-                    $email = $row['email'];
-                    $celular = $row['celular'];
-                    $telefone = $row['telefone'];
-                    $peso = $row['peso'];
-                    $altura = $row['altura'];
-                    $hipertensao = $row['hipertensao'];
-                    $diabetes = $row['diabetes'];
-                    $fumante = $row['fumante'];
-                    $cardiaco = $row['cardiaco'];
-                    $observacoes = $row['observacoes'];
-                    $medicacao = $row['medicacao'];
-                    echo '
-                    <tr>
-                    <td>'.$paciente_nome.'</td>
-                    <td>'.$dt_nasc.'</td>
-                    <td>'.$sexo.'</td>
-
-                    <td>
-                    
-                    <button type="button" onclick="GetDetails('.$paciente_id.')" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Visualizar</button>⠀⠀
-
-                    <button class="btn btn-primary" title="Editar" ><a href=".?p=editar&editarid='.$paciente_id.'" class="text-light">EDITAR</a></button>
-                    ⠀⠀
-                    <button class="btn btn-danger" color="red" title="Remover" ><a href="delete.php?deleteid='.$paciente_id.'" class="text-light">DELETAR</a></button>
-                    </td>
-
+                } else {
+                    echo '<tr>
+                    <td>Sem Resultados</td>
                     </tr>';
                 }
+
+
             }
+
+
+
 
             ?>
             </tbody>
@@ -271,10 +289,6 @@ session_start();
                 $('#mostrarObservacoes').val(paciente_id.observacoes);
                 $('#mostrarMedicacao').val(paciente_id.medicacao);
                 $('#mostrarDt').val(paciente_id.dt_nasc);
-                $('#mostrarHiper').val(paciente_id.hipertensao);
-                $('#mostrarDiabetes').val(paciente_id.diabetes);
-                $('#mostrarFumante').val(paciente_id.fumante);
-                $('#mostrarCardiaco').val(paciente_id.cardiaco);
 
                 if (paciente_id.hipertensao == 1){
                     document.getElementById("mostrarHiper").value = "Sim";
@@ -299,11 +313,13 @@ session_start();
                 }
 
 
-
             });
 
             ('#visualiar').modal("show");
         }
     </script>
 
+    <?php
+    $con->close();
+?>
 

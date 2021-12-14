@@ -81,6 +81,11 @@ error_reporting(0);
   </div>
   <div class="col-md-3 mb-3">
     <button type="submit" name="submit" class="btn btn-primary">Salvar</button>
-    <button type="submit" class="btn btn-secondary"><a href="?p=usuarios" class="text-light">Voltar</a></button>
+    
   </div>
 </form>
+<button type="submit" class="btn btn-secondary"><a href="?p=usuarios" class="text-light">Voltar</a></button>
+
+<?php
+    $con->close();
+?>

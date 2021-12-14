@@ -83,4 +83,8 @@ error_reporting(0);
   </div>
 </form>
 
+<?php
+    $con->close();
+?>
+
 

@@ -54,7 +54,7 @@ error_reporting(0);
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Novo Paciente</h1>
 </div>
-<form class="body row" method="post" action="" onsubmit="alerta()">
+<form class="body row" method="post" action=".?p=pacientes" onsubmit="alerta()">
   <div class="col-md-12 mb-3">
     <label class="form-label"><b>Dados do Paciente</b></label>
   </div>
@@ -192,9 +192,14 @@ error_reporting(0);
   </div>
   <div class="col-md-3 mb-3">
     <button type="submit" name="submit" class="btn btn-primary">Salvar</button>
-    <button type="submit" class="btn btn-secondary"><a href="?p=pacientes" class="text-light">Voltar</a></button>
+    
   </div>
 </form>
+<button type="submit" class="btn btn-secondary"><a href="?p=pacientes" class="text-light">Voltar</a></button>
+
+<?php
+    $con->close();
+?>
 
 
 
